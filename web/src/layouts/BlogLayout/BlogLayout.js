@@ -3,7 +3,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { Toaster } from '@redwoodjs/web/toast'
 
 const BlogLayout = ({ children }) => {
-  const { logOut, isAuthenticated, currentUser } = useAuth()
+  const { logOut, isAuthenticated, currentUser, hasRole } = useAuth()
 
   return (
     <>
@@ -35,6 +35,12 @@ const BlogLayout = ({ children }) => {
                 Contact
               </Link>
             </li>
+
+            {hasRole('admin') && (<li>
+              <Link className="py-2 px-4 hover:bg-blue-600 transition duration-100 rounded" to={routes.posts()}>Posts</Link>
+            </li>)}
+
+
             <li>
               {isAuthenticated ? (
                 <div>
